@@ -15,9 +15,9 @@ def unauthorized_callback():
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
-    email = db.Column(db.String, unique=True, nullable=False)
-    password = db.Column(db.String, nullable=False)
+    name = db.Column(db.String(255), nullable=False)
+    email = db.Column(db.String(255), unique=True, nullable=False)
+    password = db.Column(db.String(255), nullable=False)
     tournament = db.relationship('Tournament', backref='player', lazy=True)
     team = db.relationship('Team', backref='captain', lazy=True)
 
@@ -62,7 +62,7 @@ class Match(db.Model):
     match_num = db.Column(db.Integer)
     status = db.Column(db.Integer, nullable=False, default=0)
     maps = db.Column(db.Integer, nullable=False, default=127)
-    ip = db.Column(db.String)
+    ip = db.Column(db.String(255))
     team1_id = db.Column(db.Integer, db.ForeignKey('team.id'))
     team2_id = db.Column(db.Integer, db.ForeignKey('team.id'))
     turn = db.Column(db.Boolean, default=True)
@@ -71,18 +71,18 @@ class Match(db.Model):
     server_id = db.Column(db.Integer, db.ForeignKey('servers.id'))
     team1_score = db.Column(db.Integer, default=0)
     team2_score = db.Column(db.Integer, default=0)
-    api_key = db.Column(db.String)
+    api_key = db.Column(db.String(255))
     matchid = db.Column(db.Integer)
 
 
 class Servers(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    hostname = db.Column(db.String, nullable=False)
-    location = db.Column(db.String, nullable=False)
+    hostname = db.Column(db.String(255), nullable=False)
+    location = db.Column(db.String(255), nullable=False)
     busy = db.Column(db.Boolean, nullable=False, default=False)
-    password = db.Column(db.String, nullable=False)
+    password = db.Column(db.String(255), nullable=False)
     port = db.Column(db.Integer, nullable=False)
-    ip = db.Column(db.String, nullable=False)
+    ip = db.Column(db.String(255), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
@@ -207,5 +207,5 @@ class PlayerStats(db.Model):
 class Rounds(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     tour_id = db.Column(db.Integer)
-    round_num = db.Column(db.String)
-    bo = db.Column(db.String)
+    round_num = db.Column(db.String(255))
+    bo = db.Column(db.String(255))
