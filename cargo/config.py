@@ -18,4 +18,4 @@ SCHEDULER_JOB_DEFAULTS = {"coalesce": False, "max_instances": 3}
 SCHEDULER_API_ENABLED = False
 FTP_PORT = 2121
 FTP_DIRECTORY = r"within static folder with folder name 'demos'"
-IP = socket.gethostbyname(SERVER_URL.replace("http://", "").replace("http://", "").replace("/", ""))
+IP = socket.gethostbyname(SERVER_URL.replace("https://", "").replace("https://", "").replace("/", ""))
