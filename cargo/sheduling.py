@@ -44,7 +44,7 @@ def schedule_match_events(tour_id, round_num, match_num):
         scheduler.add_job(trigger='cron', func=participant_map_veto, args=[tour, round_num, match_num],
                           id=str(matchid)+'ma',
                           year=year, month=month, day=day,
-                          hour=hour, minute=minute)
+                          hour=hour, minute=minute, misfire_grace_time=None)
 
 
 def unschedule_match_events(tour_id, round_num, match_num):
@@ -66,7 +66,7 @@ def schedule_tour_events(tour):
         scheduler.add_job(trigger='cron', func=tour_enable, args=[tour],
                           id=str(tour.id)+'te',
                           year=year, month=month, day=day,
-                          hour=hour, minute=minute)
+                          hour=hour, minute=minute, misfire_grace_time=None)
     else:
         tour_enable(tour)
 
@@ -78,7 +78,7 @@ def schedule_tour_events(tour):
         scheduler.add_job(trigger='cron', func=tour_disable, args=[tour],
                           id=str(tour.id)+'ts',
                           year=year, month=month, day=day,
-                          hour=hour, minute=minute)
+                          hour=hour, minute=minute, misfire_grace_time=None)
 
 
 def unschedule_tour_events(tour):
