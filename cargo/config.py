@@ -5,7 +5,7 @@ import os
 SECRET_KEY = 'THISISKYEY'
 DATABASE = r"admin:613Jio613@cargoreginfo.c9je3iddxfzn.ap-south-1.rds.amazonaws.com/"
 SQLALCHEMY_DATABASE_URI = "mysql+pymysql://" + DATABASE + 'jobdone'
-SERVER_URL = 'https://cargowin.herokuapp.com/'
+SERVER_URL = 'cargowin.herokuapp.com'
 STEAM_API_KEY = '4D68245A82B5ACC74BD1068378A09AAD'
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 RECAPTCHA_USE_SSL = False
