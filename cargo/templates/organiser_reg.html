@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container">
+<div id="content" class="text-white">
+      <div class="row">
+          <div class="col-md-10">
+              <h1>{{ tour.name }} - Registrations</h1>
+          </div>
+          <div class="col-md-2">
+              <a class="btn btn-success btn-sm" href="/organise/{{tour.id}}/dashboard">Dashboard</a>
+          </div>
+      </div>
+  <table class="table text-white mt-5">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name of the Team</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for team in teams %}
+      <tr>
+        <td> {{ team.id }}</td>
+        <td>
+          <a href="/organise/{{tour.id}}/teams_details/{{team.id}}">{{ team.name }}
+            </a>
+        </td>
+        <td>
+          {% if team.reg_accepted %}
+          Accepted
+          {% else %}
+          Pending
+          {% endif %}
+        </td>
+        <td>
+          {% if team.reg_accepted %}
+          <a class="btn btn-danger btn-sm" href="/organise/{{ tour.id }}/delete_reg/{{ team.id }}">Remove</a>
+          {% else %}
+          <a class="btn btn-success btn-sm" href="/organise/{{ tour.id }}/accept/{{ team.id }}">Accept</a>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+</div>
+{% endblock %}

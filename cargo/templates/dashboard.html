@@ -1,0 +1,147 @@
+{% extends 'layout.html' %}
+{% block content %}
+<main role="main" class="container">
+    <div class="row mt-5">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        <div class="col-md-4">
+
+            <div class="bg-dark" style="background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  position: relative;">
+                <h1>Basic Settings</h1>
+                <hr>
+                Configure tournament<br>
+                <a class="btn btn-primary mt-2" href="/organise/{{tour.id}}/settings">Settings</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="bg-dark" style="background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  position: relative;">
+                <h1>Registrations</h1>
+                <hr>
+                Total Registrations: {{num_registrations}} <br>
+                <a class="btn btn-primary mt-2" href="/organise/{{ tour.id }}/registrations">Registrations</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="bg-dark" style="background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  position: relative;">
+                <h1>Servers</h1>
+                <hr>
+                Total Servers: {{num_servers}} <br>
+                <a class="btn btn-primary mt-2" href="/organise/{{tour.id}}/servers">Setup</a>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="bg-dark" style="background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  position: relative;">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h1>Matches and Schedules</h1>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="d-flex justify-content-center">
+                            <a class="btn btn-info" href="/organise/{{tour.id}}/configure">Configure Rounds</a>
+                        </div>
+
+                    </div>
+                </div>
+                <table class="table text-white mt-5">
+                    <thead>
+                      <tr>
+                        <th>Team 1</th>
+                        <th>Team 2</th>
+                        <th>Round</th>
+                        <th>Match</th>
+                        <th>Date</th>
+                          <th>Time</th>
+                          <th>Winner</th>
+                          <th>Actions</th>
+                      </tr>
+                    </thead>
+                    {% if matches %}
+
+                    <tbody>
+                    {% for round in matches %}
+                    {% for e_match in matches[round] %}
+                      <tr>
+                        <td>
+                            {% if matches[round][e_match]["team1"] %}
+                            {{ matches[round][e_match]["team1"]["name"] }}
+                            {% else %}
+                            TBD
+                            {% endif %}
+                        </td>
+                        <td>
+                          {% if matches[round][e_match]["team2"] %}
+                            {{ matches[round][e_match]["team2"]["name"] }}
+                            {% else %}
+                            TBD
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{round}}
+                        </td>
+                        <td>
+                            {{e_match}}
+                        </td>
+                          <td>
+                            {% if matches[round][e_match]["date"] %}
+                              {{matches[round][e_match]["date"]}}
+                            {% else %}
+                            TBD
+                            {% endif %}
+                        </td>
+                          <td>
+                            {% if matches[round][e_match]["time"] %}
+                              {{matches[round][e_match]["time"]}}
+                            {% else %}
+                            TBD
+                            {% endif %}
+                        </td>
+                          <td>
+                              {% if matches[round][e_match]["winner"] %}
+                            {{ matches[round][e_match]["winner"]["name"] }}
+                            {% else %}
+                            TBD
+                            {% endif %}
+                          </td>
+                        <td>
+                          <a class="btn btn-warning btn-sm" href="/organise/{{tour.id}}/round/{{round}}/match/{{e_match}}">Reschedule</a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                    {% endfor %}
+                    </tbody>
+                    {% endif %}
+                  </table>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
