@@ -407,9 +407,9 @@ def participant_map_veto(tour, round_num, match_num, bo=1):
         tb.single_elimination(round=r_n, result={"winnerId": team2["id"], "match": match_num})
         tb.single_elimination(round=r_n + 1)
         return
-    if not team1 and not team2:
-       tb.single_elimination(round=r_n, result={"winnerId": team2["id"], "match": match_num})
-       tb.single_elimination(round=r_n + 1)
+    if team1 and team2:
+      tb.single_elimination(round=r_n, result={"winnerId": team2["id"], "match": match_num})
+      tb.single_elimination(round=r_n + 1)
 
     check_all_servers(tour.id)
     server = Servers.query.filter_by(location=tour.id, busy=False).first()
