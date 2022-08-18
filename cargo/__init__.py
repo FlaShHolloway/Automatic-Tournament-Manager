@@ -42,10 +42,6 @@ if not engine.dialect.has_table(connection, "Team"):
     ORMTable = getattr(table_models, "Team")
     ORMTable.__table__.create(bind=engine, checkfirst=True)
 
-if not engine.dialect.has_table(connection, "Servers"):
-    ORMTable = getattr(table_models, "Servers")
-    ORMTable.__table__.create(bind=engine, checkfirst=True)
-
 if not engine.dialect.has_table(connection, "Match"):
     ORMTable = getattr(table_models, "Match")
     ORMTable.__table__.create(bind=engine, checkfirst=True)
@@ -56,6 +52,10 @@ if not engine.dialect.has_table(connection, "MapStats"):
 
 if not engine.dialect.has_table(connection, "Registration"):
     ORMTable = getattr(table_models, "Registration")
+    ORMTable.__table__.create(bind=engine, checkfirst=True)
+
+if not engine.dialect.has_table(connection, "Servers"):
+    ORMTable = getattr(table_models, "Servers")
     ORMTable.__table__.create(bind=engine, checkfirst=True)
 
 if not engine.dialect.has_table(connection, "PlayerStats"):
